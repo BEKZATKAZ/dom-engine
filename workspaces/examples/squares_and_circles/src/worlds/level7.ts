@@ -51,6 +51,7 @@ export class Level7 extends BaseWorld {
             { scale: float2(1, bottom ? 1 : 4) },
             { scale: float2(1, bottom ? 4 : 1) }
           ],
+          ease: "exponential-out",
           delayBetweenTransforms: (10 - i) * 0.025,
           stepDuration: 0.45
         }));

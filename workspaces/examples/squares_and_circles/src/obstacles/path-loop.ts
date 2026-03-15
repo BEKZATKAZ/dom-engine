@@ -1,5 +1,5 @@
 import { Component, Time } from "@engine/core";
-import { Float2, GamingMath, type float2 } from "low-level";
+import { evaluateWithEase, Float2, GamingMath, type Ease, type float2 } from "low-level";
 
 type Snapshot = {
   position: float2;
@@ -15,6 +15,7 @@ export type PathLoopTransform = {
 
 export type PathLoopProps = {
   path: readonly PathLoopTransform[];
+  ease?: Ease;
   stepDuration?: number;
   delayBetweenTransforms?: number;
 };
@@ -23,11 +24,13 @@ export class PathLoop extends Component {
   constructor(params: Readonly<PathLoopProps>) {
     super();
     this.path = params.path;
+    this.ease = params.ease || "linear";
     this.stepDuration = params.stepDuration || 0.5;
     this.delayBetweenTransforms = params.delayBetweenTransforms || 0;
   }
 
   private readonly path: readonly PathLoopTransform[];
+  private readonly ease: Ease;
   private readonly stepDuration: number;
   private readonly delayBetweenTransforms: number;
 
@@ -90,17 +93,18 @@ export class PathLoop extends Component {
     const snapshot = this.previousSnapshot;
 
     this.progress = Math.min(this.progress + Time.deltaTime / duration);
+    const evaluated = evaluateWithEase(this.progress, this.ease);
 
     if (target.rotation !== undefined) {
-      this.transform.rotation = GamingMath.lerp(snapshot.rotation, target.rotation, this.progress);
+      this.transform.rotation = GamingMath.lerp(snapshot.rotation, target.rotation, evaluated);
     }
 
     if (target.position !== undefined) {
-      this.transform.position = Float2.lerp(snapshot.position, target.position, this.progress);
+      this.transform.position = Float2.lerp(snapshot.position, target.position, evaluated);
     }
 
     if (target.scale !== undefined) {
-      this.transform.scale = Float2.lerp(snapshot.scale, target.scale, this.progress);
+      this.transform.scale = Float2.lerp(snapshot.scale, target.scale, evaluated);
     }
 
     if (this.progress >= 1) this.onReach();
