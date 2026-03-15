@@ -1,6 +1,6 @@
 import { CollisionSimulator, Time, WorldManager } from "@engine/core";
 import { Level1, BackgroundWorld } from "./worlds";
-import { Level8 } from "./worlds/level8";
+import { Level9 } from "./worlds/level9";
 import { RenderBuffer } from "@engine/rendering";
 import * as music from "./music-player";
 
@@ -17,6 +17,6 @@ function update(time: number) {
 
 window.addEventListener("load", () => {
   WorldManager.load(new BackgroundWorld());
-  WorldManager.load(new Level8());
+  WorldManager.load(new Level9());
   requestAnimationFrame(update);
 });

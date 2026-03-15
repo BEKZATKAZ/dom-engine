@@ -1,6 +1,7 @@
 import { BaseWorld } from "./base-world";
 import { float2 } from "low-level";
 import { Windmail } from "obstacles/windmail";
+import { Level9 } from "./level9";
 
 export class Level8 extends BaseWorld {
   constructor() {
@@ -26,6 +27,6 @@ export class Level8 extends BaseWorld {
       speed: 60
     }));
 
-    this.createPoints("bottom-left", "top-left");
+    this.createPoints("bottom-left", "top-left", () => new Level9());
   }
 }
