@@ -1,0 +1,20 @@
+{
+  "files.exclude": {
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/.DS_Store": true,
+    "**/Thumbs.db": true,
+    "**/[Bb]uild": true,
+    "**/[Bb]in": true,
+    "**/[Dd]ebug": true,
+    "**/[Rr]elease": true,
+    "**/[Dd]ist": true,
+    "**/node_modules": true,
+    "**/*log": true,
+    "**/*logs": true,
+    "**/*cache": true,
+    "**/*coverage": true,
+    "**/*.tsbuildinfo": true
+  }
+}

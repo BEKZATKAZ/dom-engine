@@ -1,0 +1,19 @@
+{
+  "packageManager": "pnpm@10.32.1",
+  "private": true,
+  "name": "low-level",
+  "type": "module",
+  "license": "MIT",
+  "main": "./dist/index.js",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "scripts": {
+    "build": "pnpm run clean && tsc -b && tsc-alias -p tsconfig.json",
+    "clean": "tsc -b --clean"
+  }
+}

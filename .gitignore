@@ -1,0 +1,16 @@
+node_modules
+[Dd]ist
+[Bb]in
+[Bb]uild
+[Dd]ebug
+[Rr]elease
+
+coverage
+*log
+*logs
+*cache
+*.tsbuildinfo
+
+pnpm-lock.yaml
+package-lock.json
+yarn.lock

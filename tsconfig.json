@@ -1,0 +1,36 @@
+{
+  "compilerOptions": {
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "moduleDetection": "force",
+    "target": "esnext",
+    "lib": ["esnext"],
+    "types": ["node"],
+
+    // Outputs
+    "declaration": true,
+    "declarationMap": false,
+    "outDir": "./dist",
+
+    // Stricter Typechecking Options
+    "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": true,
+
+    // Style Options
+    "noImplicitReturns": true,
+    "noImplicitOverride": true,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "noFallthroughCasesInSwitch": true,
+    "noPropertyAccessFromIndexSignature": true,
+
+    // Recommended Options
+    "strict": true,
+    "verbatimModuleSyntax": true,
+    "isolatedModules": true,
+    "noUncheckedSideEffectImports": true,
+    "skipLibCheck": true
+  },
+  "include": ["**/src/**/*", "workspaces/engine/user/src/index.ts", "workspaces/engine/user/src/mouse.ts", "workspaces/engine/user/src/screen.ts"],
+  "exclude": ["node_modules", "dist"]
+}
