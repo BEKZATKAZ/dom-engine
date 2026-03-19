@@ -1,5 +1,6 @@
 import { BaseWorld } from "./base-world";
 import { Color, Float2, float2 } from "low-level";
+import { CreditsLevel } from "./credits";
 import { PathLoop, StaticWall, type PathLoopTransform } from "obstacles";
 
 export class Level9 extends BaseWorld {
@@ -40,7 +41,7 @@ export class Level9 extends BaseWorld {
       }));
     }
 
-    this.createPoints("top-left", "top-right");
+    this.createPoints("top-left", "top-right", () => new CreditsLevel());
   }
 
   private spawnBouncingObject(indexOffset: number) {

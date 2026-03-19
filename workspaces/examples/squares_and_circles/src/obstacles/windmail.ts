@@ -1,8 +1,9 @@
 import { ConstantRotation } from "./constant-rotation";
 import { Color, float2, hex } from "low-level";
+import { CircleRenderer } from "@engine/rendering";
+import { GameLayers } from "layers";
 import { GameObject, type TransformParams } from "@engine/core";
 import { StaticWall } from "./static";
-import { CircleRenderer } from "@engine/rendering";
 
 export type WindmailParams = {
   iterations: number;
@@ -24,6 +25,7 @@ export class Windmail extends GameObject {
   private readonly params: WindmailParams;
 
   protected override onStart(): void {
+    this.layer = GameLayers.Obstacle;
     const step = 180 / this.params.iterations;
 
     for (let i = 0; i < this.params.iterations; i++) {

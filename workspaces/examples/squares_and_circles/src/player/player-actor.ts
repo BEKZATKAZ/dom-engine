@@ -2,11 +2,14 @@ import { CircleRenderer } from "@engine/rendering";
 import { Collider, GameObject } from "@engine/core";
 import { CursorFollower } from "./cursor-follower";
 import { Float2, hex } from "low-level";
+import { GameLayers } from "layers";
 import { LevelLoader } from "./level-loader";
 import { LevelRestarter } from "./level-restarter";
 
 export class PlayerActor extends GameObject {
   protected override onStart(): void {
+    this.layer = GameLayers.Player;
+
     this.addComponent(new CursorFollower({
       stiffness: 700,
       damping: 25

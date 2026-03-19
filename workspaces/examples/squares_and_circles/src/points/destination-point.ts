@@ -1,4 +1,5 @@
 import { Collider } from "@engine/core";
+import { GameLayers } from "layers";
 import { float2, hex } from "low-level";
 import { Point } from "./point";
 import { RectRenderer } from "@engine/rendering";
@@ -6,6 +7,7 @@ import { RectRenderer } from "@engine/rendering";
 export class DestinationPoint extends Point {
   protected override onStart(): void {
     super.onStart();
+    this.layer = GameLayers.Finish;
 
     this.addComponent(new Collider({
       type: "rect",

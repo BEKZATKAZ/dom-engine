@@ -1,12 +1,15 @@
 import { CircleRenderer } from "@engine/rendering";
 import { Collider, GameObject } from "@engine/core";
 import { float2, Float2, hex } from "low-level";
+import { GameLayers } from "layers";
 import { PickUpView } from "./pickup-view";
 
 export class PickUp extends GameObject {
   private view: GameObject = null!;
 
   protected override onStart(): void {
+    this.layer = GameLayers.Pickup;
+
     this.view = this.world
       .createEmptyObject({
         position: Float2.zero,

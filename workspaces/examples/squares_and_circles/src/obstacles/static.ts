@@ -1,6 +1,7 @@
 import { Collider, GameObject, type TransformParams } from "@engine/core";
 import { Color, color, float2, Float2, hex } from "low-level";
 import { RectRenderer } from "@engine/rendering";
+import { GameLayers } from "layers";
 
 export type StaticWallParams = {
   pivot?: float2;
@@ -19,6 +20,7 @@ export class StaticWall extends GameObject {
   private readonly params: Required<StaticWallParams>;
 
   protected override onStart(): void {
+    this.layer = GameLayers.Obstacle;
     const pivot = this.params.pivot;
 
     this.addComponent(new Collider({
