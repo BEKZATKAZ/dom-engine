@@ -1,5 +1,6 @@
 import { Component } from "./component";
 import { Float2, type float2 } from "low-level";
+import { layer } from "./layers";
 import type { Transform } from "./transform";
 import type { World } from "./worlds";
 
@@ -20,14 +21,13 @@ export class GameObject {
       rotation: transform?.rotation ?? 0,
       scale: transform?.scale ?? Float2.one
     };
-
-    this.id = ++lastId as GameObjectId;
-    this.active = true;
   }
 
-  public readonly id: GameObjectId;
+  public readonly id = ++lastId as GameObjectId;
   public readonly transform: Transform;
-  public active: boolean;
+
+  public active = true;
+  public layer = layer(0);
 
   private readonly components = new Map<unknown, Component>();
   private _world: World = null!;

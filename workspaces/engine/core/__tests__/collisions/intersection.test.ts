@@ -1,28 +1,28 @@
 import { Collider } from "collisions/collider";
 import { float2 } from "low-level";
 import { GameObject } from "game-object";
-import { CirclevsCircle, intersects, OBBvsCircle, OBBvsOBB } from "collisions/collision-math";
+import { CirclevsCircle, narrowIntersects, OBBvsCircle, OBBvsOBB } from "collisions/phases";
 
 type ColliderType = "rect" | "circle";
 
 describe("Incorrect method calls", () => {
   it("throws when calling intersects() with invalid types", () => {
-    assert.throws(() => intersects(
+    assert.throws(() => narrowIntersects(
       new Collider({ type: "invalid-type" as ColliderType, radius: 1 }),
       new Collider({ type: "rect" })
     ));
 
-    assert.throws(() => intersects(
+    assert.throws(() => narrowIntersects(
       new Collider({ type: "invalid-type" as ColliderType, radius: 1 }),
       new Collider({ type: "circle", radius: 1 })
     ));
 
-    assert.throws(() => intersects(
+    assert.throws(() => narrowIntersects(
       new Collider({ type: "circle", radius: 1 }),
       new Collider({ type: "invalid-type" as ColliderType, radius: 1 })
     ));
 
-    assert.throws(() => intersects(
+    assert.throws(() => narrowIntersects(
       new Collider({ type: "rect" }),
       new Collider({ type: "invalid-type" as ColliderType, radius: 1 })
     ));
@@ -78,8 +78,8 @@ describe("OBB vs OBB", () => {
       const b = new GameObject({ position: bp, rotation: rotation + 15 })
         .addComponent(new Collider({ type: "rect" }));
 
-      assert.isTrue(intersects(a, b));
-      assert.isTrue(intersects(b, a), "Worked with (a <-> b) but not with (b <-> a)?");
+      assert.isTrue(narrowIntersects(a, b));
+      assert.isTrue(narrowIntersects(b, a), "Worked with (a <-> b) but not with (b <-> a)?");
     }
   });
 
@@ -93,8 +93,8 @@ describe("OBB vs OBB", () => {
     const b = new GameObject({ position: float2(5, 100) })
       .addComponent(new Collider({ type: "rect" }));
 
-    assert.isFalse(intersects(a, b));
-    assert.isFalse(intersects(b, a), "Worked with (a <-> b) but not with (b <-> a)?");
+    assert.isFalse(narrowIntersects(a, b));
+    assert.isFalse(narrowIntersects(b, a), "Worked with (a <-> b) but not with (b <-> a)?");
   });
 });
 
@@ -111,8 +111,8 @@ describe("OBB vs Circle", () => {
     const b = new GameObject({ position: bp })
       .addComponent(new Collider({ type: "circle", radius: 1 }));
 
-    assert.isTrue(intersects(a, b));
-    assert.isTrue(intersects(b, a), "Worked with (a <-> b) but not with (b <-> a)?");
+    assert.isTrue(narrowIntersects(a, b));
+    assert.isTrue(narrowIntersects(b, a), "Worked with (a <-> b) but not with (b <-> a)?");
   });
 
   it.each([
@@ -125,8 +125,8 @@ describe("OBB vs Circle", () => {
     const b = new GameObject({ position: bp })
       .addComponent(new Collider({ type: "circle", radius: 1 }));
 
-    assert.isFalse(intersects(a, b));
-    assert.isFalse(intersects(b, a), "Worked with (a <-> b) but not with (b <-> a)?");
+    assert.isFalse(narrowIntersects(a, b));
+    assert.isFalse(narrowIntersects(b, a), "Worked with (a <-> b) but not with (b <-> a)?");
   });
 });
 
@@ -143,8 +143,8 @@ describe("Circle vs Circle", () => {
     const b = new GameObject({ position: bp })
       .addComponent(new Collider({ type: "circle", radius: 0.1 }));
 
-    assert.isTrue(intersects(a, b));
-    assert.isTrue(intersects(b, a), "Worked with (a <-> b) but not with (b <-> a)?");
+    assert.isTrue(narrowIntersects(a, b));
+    assert.isTrue(narrowIntersects(b, a), "Worked with (a <-> b) but not with (b <-> a)?");
   });
 
   it.each([
@@ -157,7 +157,7 @@ describe("Circle vs Circle", () => {
     const b = new GameObject({ position: bp })
       .addComponent(new Collider({ type: "circle", radius: 15 }));
 
-    assert.isFalse(intersects(a, b));
-    assert.isFalse(intersects(b, a), "Worked with (a <-> b) but not with (b <-> a)?");
+    assert.isFalse(narrowIntersects(a, b));
+    assert.isFalse(narrowIntersects(b, a), "Worked with (a <-> b) but not with (b <-> a)?");
   });
 });

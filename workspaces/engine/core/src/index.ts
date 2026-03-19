@@ -1,5 +1,6 @@
 export * from "./collections";
 export * from "./collisions";
+export * from "./layers";
 export * from "./worlds";
 
 export * from "./camera";

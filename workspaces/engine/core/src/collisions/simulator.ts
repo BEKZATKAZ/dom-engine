@@ -1,5 +1,6 @@
 import { Collider } from "./collider";
-import { intersects } from "./collision-math";
+import { broadIntersects, narrowIntersects } from "./phases";
+import { LayerMatrix } from "layers";
 import type { GameObject, GameObjectId } from "../game-object";
 
 const colliders: Collider[] = [];
@@ -10,6 +11,11 @@ function registerIntersection(a: Collider, b: Collider) {
   const array = lastIntersections.get(id) || [];
   array.push(b);
   lastIntersections.set(id, array);
+}
+
+function checkIntersection(a: Collider, b: Collider): boolean {
+  if (LayerMatrix.isContactAllowed(a.gameObject.layer, b.gameObject.layer) === false) return false;
+  return broadIntersects(a, b) && narrowIntersects(a, b);
 }
 
 export class CollisionSimulator {
@@ -31,13 +37,17 @@ export class CollisionSimulator {
 
     for (let i = 0; i < colliders.length - 1; i++) {
       for (let j = i + 1; j < colliders.length; j++) {
-        const a = colliders[i]!;
-        const b = colliders[j]!;
+        try {
+          const a = colliders[i]!;
+          const b = colliders[j]!;
 
-        if (intersects(a, b) === false) continue;
-
-        registerIntersection(a, b);
-        registerIntersection(b, a);
+          if (checkIntersection(a, b) === false) continue;
+          registerIntersection(a, b);
+          registerIntersection(b, a);
+        }
+        catch (err) {
+          console.error("Collision simulation failed", err);
+        }
       }
     }
 

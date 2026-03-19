@@ -1,7 +1,7 @@
-import type { Collider } from "./collider";
+import type { Collider } from "collisions/collider";
 import { float2, Float2 } from "low-level";
 
-export function intersects(a: Collider, b: Collider): boolean {
+export function narrowIntersects(a: Collider, b: Collider): boolean {
   switch (a.props.type) {
     case "rect":
       switch (b.props.type) {

@@ -4,17 +4,17 @@ import { Float2, float2 } from "low-level";
 
 export type CircleColliderProps = {
   type: "circle";
-  center?: float2;
   radius: number;
 };
 
 export type RectangeColliderProps = {
   type: "rect";
-  center?: float2;
   halfSize?: float2;
 };
 
-export type ColliderProps = RectangeColliderProps | CircleColliderProps;
+export type ColliderProps = {
+  center?: float2;
+} & (RectangeColliderProps | CircleColliderProps);
 
 export class Collider extends Component {
   constructor(props: ColliderProps) {
