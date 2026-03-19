@@ -1,16 +1,20 @@
 # Auto detect text files and perform LF normalization
 * text=auto
 
-*.svg text
-*.jpg  filter=lfs diff=lfs merge=lfs -text
-*.jpeg filter=lfs diff=lfs merge=lfs -text
-*.png  filter=lfs diff=lfs merge=lfs -text
-*.tga  filter=lfs diff=lfs merge=lfs -text
-*.psd  filter=lfs diff=lfs merge=lfs -text
-*.tiff filter=lfs diff=lfs merge=lfs -text
-*.bmp  filter=lfs diff=lfs merge=lfs -text
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
 
-*.wav  filter=lfs diff=lfs merge=lfs -text
-*.mp3  filter=lfs diff=lfs merge=lfs -text
-*.ogg  filter=lfs diff=lfs merge=lfs -text
-*.flac filter=lfs diff=lfs merge=lfs -text
+*.ogg binary
+*.mp3 binary
+*.wav binary
+*.flac binary
+
+*.html text
+*.css text
+*.js text
+*.ts text
+*.json text
+*.svg text
